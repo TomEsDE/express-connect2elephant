@@ -14,7 +14,8 @@ console.log('elephantConnection', elephantConnection);
 export default {
   elephant: {
     client: 'postgresql',
-    connection: elephantConnection,
+    connection:
+      'postgres://ssgvnznd:NxhPfEwOV2i2MJXAoixEyrB79txE-W11@balarama.db.elephantsql.com/ssgvnznd',
     pool: {
       min: 2,
       max: 5,
