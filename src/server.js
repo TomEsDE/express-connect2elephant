@@ -1,12 +1,13 @@
 import express from 'express';
 import http from 'http';
-import { routesUser } from './routes/user';
-import { routesOrder } from './routes/order';
 import dotenv from 'dotenv';
-import { BadRequestError, NotFoundError } from './js/HttpError';
-import logRequest from './middleware/logRequest';
 import morgan from 'morgan';
 import cors from cors;
+
+import { routesUser } from './routes/user';
+import { routesOrder } from './routes/order';
+import { BadRequestError, NotFoundError } from './js/HttpError';
+import logRequest from './middleware/logRequest';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
