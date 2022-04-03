@@ -3,6 +3,9 @@ import http from 'http';
 import { routesUser } from './routes/user';
 import { routesOrder } from './routes/order';
 import dotenv from 'dotenv';
+import { BadRequestError, NotFoundError } from './js/HttpError';
+import logRequest from './middleware/logRequest';
+import morgan from 'morgan';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -35,6 +38,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(morgan('dev'));
+app.use(logRequest);
 /** Routes */
 app.use('/user', routesUser);
 app.use('/order', routesOrder);
@@ -43,11 +48,22 @@ app.use('/order', routesOrder);
 app.use(express.static('public'));
 
 /** Error handling */
-app.use((req, res, next) => {
-  const error = new Error('not found');
-  return res.status(404).json({
-    message: error.message,
-  });
+app.use((error, req, res, next) => {
+  let status = 500;
+  let errorMsg = '';
+  if (error instanceof BadRequestError) {
+    status = error.code;
+    errorMsg = error.errorObj;
+  } else if (error instanceof NotFoundError) {
+    status = error.code;
+    errorMsg = { error: error.message };
+  } else if (error instanceof Error) {
+    errorMsg = { error: error.message };
+  } else errorMsg = error;
+
+  console.log('error-middleware', errorMsg);
+
+  return res.status(status).json(errorMsg);
 });
 
 // console.log(process.env.DB_CONFIG);

@@ -40,7 +40,8 @@ class User {
     return result;
   }
 
-  async updateUser(id, firstName, lastName, age, active) {
+  async updateUser(id, firstName, lastName, age = null, active) {
+    // throw new Error('test error db update');
     const result = await db('users')
       .update({
         first_name: firstName,
@@ -50,7 +51,7 @@ class User {
       })
       .where({ id: id });
 
-    return result;
+    return result === 1;
   }
 
   async deleteUser(id) {

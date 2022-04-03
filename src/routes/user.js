@@ -11,9 +11,12 @@ routesUser.get('/', userController.getUsers);
 routesUser.post(
   '/',
   validate([
-    body('firstName').not().isEmpty(),
-    body('lastName').not().isEmpty(),
-    body('age').isNumeric(),
+    body('firstName').not().isEmpty().withMessage('First name is required'),
+    body('lastName').not().isEmpty().withMessage('Last name is required'),
+    body('age')
+      .if(body('age').exists())
+      .isNumeric()
+      .withMessage('age must be a number'),
     body('active').isBoolean(),
   ]),
   userController.createUser
@@ -29,9 +32,12 @@ routesUser.put(
   '/:id',
   validate([
     param('id').isNumeric(),
-    body('firstName').not().isEmpty(),
-    body('lastName').not().isEmpty(),
-    body('age').isNumeric(),
+    body('firstName').not().isEmpty().withMessage('First name is required'),
+    body('lastName').not().isEmpty().withMessage('Last name is required'),
+    body('age')
+      .if(body('age').exists())
+      .isNumeric()
+      .withMessage('age must be a number'),
     body('active').isBoolean(),
   ]),
   userController.editUser

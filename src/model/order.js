@@ -60,7 +60,7 @@ class Order {
       })
       .where({ id: id });
 
-    return result;
+    return result === 1;
   }
 
   async deleteOrder(id) {

@@ -9,7 +9,7 @@ const routesOrder = express.Router();
 routesOrder.get('/', orderController.getOrders);
 routesOrder.post(
   '/',
-  validate(body('price').isNumeric()),
+  validate([body('price').isNumeric().withMessage('Price must be a number')]),
   orderController.createOrder
 );
 routesOrder.get(
@@ -19,7 +19,10 @@ routesOrder.get(
 );
 routesOrder.put(
   '/:id',
-  validate([param('id').isNumeric()], body('price').isNumeric()),
+  validate([
+    param('id').isNumeric(),
+    body('price').isNumeric().withMessage('Price must be a number'),
+  ]),
   orderController.editOrder
 );
 routesOrder.delete(
