@@ -12,7 +12,8 @@ console.log('pw', process.env.DB_ELEPHANT_PW);
 export default {
   elephant: {
     client: 'postgresql',
-    connection: `postgres://ssgvnznd:${process.env.DB_ELEPHANT_PW}@balarama.db.elephantsql.com/ssgvnznd`,
+    // connection: `postgres://ssgvnznd:${process.env.DB_ELEPHANT_PW}@balarama.db.elephantsql.com/ssgvnznd`,
+    connection: `postgres://eegsmjkn:${process.env.DB_ELEPHANT_PW}@kandula.db.elephantsql.com/eegsmjkn`,
     pool: {
       min: 2,
       max: 5,
