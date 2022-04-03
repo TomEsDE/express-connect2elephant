@@ -15,10 +15,7 @@ class UserController {
 
   async getUsers(req, res, next) {
     try {
-      const result = await userService.getUsers();
-
-      if (result) return res.status(200).json(result);
-      else return next(new NotFoundError());
+      return res.status(200).json(await userService.getUsers());
     } catch (error) {
       next(error);
     }
@@ -26,10 +23,7 @@ class UserController {
 
   async getUser(req, res, next) {
     try {
-      const result = await userService.getUser(req.params.id);
-
-      if (result) return res.status(200).json(result);
-      else return next(new NotFoundError());
+      return res.status(200).json(req.user);
     } catch (error) {
       next(error);
     }
@@ -37,10 +31,9 @@ class UserController {
 
   async editUser(req, res, next) {
     try {
-      const result = await userService.editUser(req.params.id, req.body);
+      const result = await userService.editUser(req.user.id, req.body);
 
       if (result) return res.status(200).json(result);
-      else return next(new NotFoundError());
     } catch (error) {
       next(error);
     }
@@ -48,10 +41,9 @@ class UserController {
 
   async deleteUser(req, res, next) {
     try {
-      const result = await userService.deleteUser(req.params.id);
+      const result = await userService.deleteUser(req.user.id);
 
       if (result) return res.status(200).json(result);
-      else return next(new NotFoundError());
     } catch (error) {
       next(error);
     }
@@ -59,7 +51,7 @@ class UserController {
 
   async getUserOrders(req, res, next) {
     try {
-      const result = await userService.getUserOrders(req.params.id);
+      const result = await userService.getUserOrders(req.user.id);
 
       if (result) return res.status(200).json(result);
       else return next(new NotFoundError());
@@ -70,7 +62,7 @@ class UserController {
 
   async checkInactive(req, res, next) {
     try {
-      const result = await userService.checkInactive(req.params.id);
+      const result = await userService.checkInactive(req.user.id);
 
       if (result) return res.status(200).json(result);
       else return next(new NotFoundError());

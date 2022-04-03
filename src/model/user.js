@@ -40,7 +40,7 @@ class User {
     return result;
   }
 
-  async updateUser(id, firstName, lastName, age = null, active) {
+  async updateUser(id, firstName, lastName, age = null, active = false) {
     // throw new Error('test error db update');
     const result = await db('users')
       .update({

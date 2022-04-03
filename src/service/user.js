@@ -5,7 +5,12 @@ class UserService {
   createUser(userDto) {
     const { firstName, lastName, age, active } = userDto;
 
-    return user.createUser(firstName, lastName, age, active);
+    return user.createUser(
+      firstName,
+      lastName,
+      age,
+      active === null ? false : active
+    );
   }
 
   async getUsers() {
@@ -58,7 +63,13 @@ class UserService {
 
   async editUser(id, userDto) {
     const { firstName, lastName, age, active } = userDto;
-    const userDB = await user.updateUser(id, firstName, lastName, age, active);
+    const userDB = await user.updateUser(
+      id,
+      firstName,
+      lastName,
+      age,
+      active === null ? false : active
+    );
 
     console.log('userDB', userDB);
     // userDB.orders = await user.getUserOrders(userDB.id);
