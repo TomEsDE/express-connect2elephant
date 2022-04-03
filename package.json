@@ -1,7 +1,7 @@
 {
-  "name": "express-cookbook",
+  "name": "express-base-app-with-knex",
   "version": "0.0.1",
-  "description": "backend to cookbook-react-app",
+  "description": "backend with db-connection via knex",
   "main": "src/server.js",
   "type": "module",
   "scripts": {

@@ -4,9 +4,7 @@ import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
-
-const elephantConnection = `postgres://${process.env.DB_ELEPHANT_DB}:${process.env.DB_ELEPHANT_PW}@${process.env.DB_ELEPHANT_HOST}/${process.env.DB_ELEPHANT_DB}`;
-console.log('elephantConnection', elephantConnection);
+console.log('pw', process.env.DB_ELEPHANT_PW);
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -14,8 +12,7 @@ console.log('elephantConnection', elephantConnection);
 export default {
   elephant: {
     client: 'postgresql',
-    connection:
-      'postgres://ssgvnznd:NxhPfEwOV2i2MJXAoixEyrB79txE-W11@balarama.db.elephantsql.com/ssgvnznd',
+    connection: `postgres://ssgvnznd:${process.env.DB_ELEPHANT_PW}@balarama.db.elephantsql.com/ssgvnznd`,
     pool: {
       min: 2,
       max: 5,
