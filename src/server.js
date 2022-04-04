@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import cors from cors;
+import cors from 'cors';
 
 import { routesUser } from './routes/user';
 import { routesOrder } from './routes/order';
