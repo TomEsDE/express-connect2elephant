@@ -19,8 +19,13 @@ console.log('NODE_ENV >> ', process.env.NODE_ENV);
 const app = express();
 // const port = process.env.PORT;
 
+/** Parse the request */
+app.use(express.urlencoded({ extended: false }));
+/** Takes care of JSON data */
+app.use(express.json());
+
 /** middlewares */
-app.use(cors())
+app.use(cors());
 app.use(morgan('dev'));
 
 app.use(logRequest);
